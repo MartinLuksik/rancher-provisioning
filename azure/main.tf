@@ -1,9 +1,9 @@
 variable "prefix" {
-  default = "nbapcgo"
+    default = "nbapcgo"
 }
 
 variable "vmsize" {
-    defualt = "Standard_B2s"
+    default = "Standard_B2s"
 }
 
 variable "ubuntuuser" {
