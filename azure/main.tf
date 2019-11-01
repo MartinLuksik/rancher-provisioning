@@ -144,7 +144,7 @@ resource "azurerm_virtual_machine" "main" {
 resource "azurerm_dns_a_record" "main" {
   name                = "rancher"
   zone_name           = "mldedicated.net"
-  resource_group_name = "${azurerm_resource_group.main.name}"
+  resource_group_name = "mlstable"
   ttl                 = 1
   records             = ["${azurerm_public_ip.main.ip_address}"]
 }
