@@ -37,15 +37,69 @@ resource "azurerm_subnet" "internal" {
   address_prefix       = "10.0.2.0/24"
 }
 
+# Create Network Security Group and rule
+resource "azurerm_network_security_group" "main" {
+    name                = "${var.prefix}-nsg"
+    location            = "westeurope"
+    resource_group_name = azurerm_resource_group.main.name
+    
+    security_rule {
+        name                       = "SSH"
+        priority                   = 300
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "Tcp"
+        source_port_range          = "*"
+        destination_port_range     = "22"
+        source_address_prefix      = "*"
+        destination_address_prefix = "*"
+    }
+
+    security_rule {
+        name                       = "HTTP"
+        priority                   = 340
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "Tcp"
+        source_port_range          = "*"
+        destination_port_range     = "80"
+        source_address_prefix      = "*"
+        destination_address_prefix = "*"
+    }
+
+    security_rule {
+        name                       = "HTTPS"
+        priority                   = 320
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "Tcp"
+        source_port_range          = "*"
+        destination_port_range     = "443"
+        source_address_prefix      = "*"
+        destination_address_prefix = "*"
+    }
+}
+
+# Create public IPs
+resource "azurerm_public_ip" "main" {
+    name                         = "${var.prefix}ip"
+    location                     = "westeurope"
+    resource_group_name          = azurerm_resource_group.main.name
+    allocation_method            = "Dynamic"
+}
+
 resource "azurerm_network_interface" "main" {
   name                = "${var.prefix}-nic"
   location            = "${azurerm_resource_group.main.location}"
   resource_group_name = "${azurerm_resource_group.main.name}"
+  network_security_group_id = azurerm_network_security_group.main.id
 
   ip_configuration {
     name                          = "testconfiguration1"
     subnet_id                     = "${azurerm_subnet.internal.id}"
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = "${azurerm_public_ip.main.id}"
+
   }
 }
 
@@ -84,6 +138,5 @@ resource "azurerm_virtual_machine" "main" {
     disable_password_authentication = false
   }
   tags = {
-    environment = "staging"
   }
 }
