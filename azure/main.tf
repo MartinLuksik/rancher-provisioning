@@ -146,5 +146,5 @@ resource "azurerm_dns_a_record" "main" {
   zone_name           = "mldedicated.net"
   resource_group_name = "${azurerm_resource_group.main.name}"
   ttl                 = 1
-  records             = "${azurerm_public_ip.main.ip_address}"
+  records             = ["${azurerm_public_ip.main.ip_address}"]
 }
