@@ -41,7 +41,7 @@ resource "azurerm_subnet" "internal" {
 resource "azurerm_network_security_group" "main" {
     name                = "${var.prefix}-nsg"
     location            = "westeurope"
-    resource_group_name = azurerm_resource_group.main.name
+    resource_group_name = "${azurerm_resource_group.main.name}"
     
     security_rule {
         name                       = "SSH"
@@ -84,7 +84,7 @@ resource "azurerm_network_security_group" "main" {
 resource "azurerm_public_ip" "main" {
     name                         = "${var.prefix}ip"
     location                     = "westeurope"
-    resource_group_name          = azurerm_resource_group.main.name
+    resource_group_name          = "${azurerm_resource_group.main.name}"
     allocation_method            = "Dynamic"
 }
 
@@ -149,7 +149,12 @@ resource "azurerm_virtual_machine" "main" {
 #  records             = ["${azurerm_public_ip.main.ip_address}"]
 #}
 
+data "azurerm_public_ip" "main" {
+  name                = "${azurerm_public_ip.main.name"}
+  resource_group_name = "${azurerm_resource_group.main.name}"
+}
+
 output "ipadressasoutput" {
   sensitive = false
-  value = ["${azurerm_public_ip.main.ip_address}"]
+  value = ["${data.azurerm_public_ip.main.ip_address}"]
 }
