@@ -141,19 +141,15 @@ resource "azurerm_virtual_machine" "main" {
   }
 }
 
-#resource "azurerm_dns_a_record" "main" {
-#  name                = "rancher"
-#  zone_name           = "mldedicated.net"
-#  resource_group_name = "mlstable"
-#  ttl                 = 1
-#  records             = ["${azurerm_public_ip.main.ip_address}"]
-#}
-
 data "azurerm_public_ip" "main" {
   name                = "${azurerm_public_ip.main.name"}
   resource_group_name = "${azurerm_resource_group.main.name}"
 }
 
-output "ipadressasoutput" {
-  value = "${data.azurerm_public_ip.main.ip_address}"
+resource "azurerm_dns_a_record" "main" {
+  name                = "rancher"
+  zone_name           = "mldedicated.net"
+  resource_group_name = "mlstable"
+  ttl                 = 1
+  records             = ["${data.azurerm_public_ip.main.ip_address}"]
 }
