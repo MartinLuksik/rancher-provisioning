@@ -148,3 +148,8 @@ resource "azurerm_dns_a_record" "main" {
   ttl                 = 1
   records             = ["${azurerm_public_ip.main.ip_address}"]
 }
+
+output "ipadressasoutput " {
+  sensitive = false
+  value = ["${azurerm_public_ip.main.ip_address}"]
+}
