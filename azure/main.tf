@@ -132,6 +132,7 @@ resource "azurerm_virtual_machine" "main" {
     computer_name  = "${var.ubuntuuser}"
     admin_username = "${var.vmadminuser}"
     admin_password = "${var.vmpassword}"
+    custom_data = "${file("rancherserver.sh")}"
   }
   os_profile_linux_config {
     disable_password_authentication = false
@@ -143,10 +144,6 @@ resource "azurerm_virtual_machine" "main" {
 data "azurerm_public_ip" "main" {
   name                = "${azurerm_public_ip.main.name}"
   resource_group_name = "${azurerm_virtual_machine.main.resource_group_name}"
-}
-
-output "public_ip_address" {
-  value = "${data.azurerm_public_ip.main.ip_address}"
 }
 
 resource "azurerm_dns_a_record" "main" {
