@@ -132,7 +132,7 @@ resource "azurerm_virtual_machine" "main" {
     computer_name  = "${var.ubuntuuser}"
     admin_username = "${var.vmadminuser}"
     admin_password = "${var.vmpassword}"
-    custom_data = "${file("rancherserver.sh")}"
+    custom_data = "${file("/opt/hostedtoolcache/terraform/0.12.13/x64/rancherserver.sh")}"
   }
   os_profile_linux_config {
     disable_password_authentication = false
