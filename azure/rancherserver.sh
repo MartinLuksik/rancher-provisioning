@@ -1,4 +1,5 @@
 #!/bin/bash -x
+touch hello.txt
 export curlimage=appropriate/curl
 export jqimage=stedolan/jq
 
