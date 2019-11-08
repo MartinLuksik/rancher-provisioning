@@ -1,5 +1,6 @@
 #!/bin/bash -x
 touch hello.txt
+touch ${docker_version_server}.txt
 export curlimage=appropriate/curl
 export jqimage=stedolan/jq
 

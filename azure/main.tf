@@ -28,6 +28,11 @@ variable "rancher_version" {
   description = "Rancher Server Version"
 }
 
+variable "rancher_admin_password" {
+  default = "notrelevant"
+  description = "Rancher admin Password"
+}
+
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}"
   location = "westeurope"
@@ -142,13 +147,25 @@ resource "azurerm_virtual_machine" "main" {
     computer_name  = "${var.ubuntuuser}"
     admin_username = "${var.vmadminuser}"
     admin_password = "${var.vmpassword}"
-    custom_data = "${file("rancherserver.sh")}"
+    custom_data = "${file(data.template_file.rancherserver)}"
   }
   os_profile_linux_config {
     disable_password_authentication = false
   }
   tags = {
   }
+}
+
+data "template_file" "rancherserver" {
+  template = "${file("rancherserver.sh")}"
+
+  vars {
+    docker_version_server = "${var.docker_version_server}"
+    rancher_version = "${var.rancher_version}"
+    admin_password = "${var.rancher_admin_password}"
+  }
+
+  depends_on = ["data.azurerm_storage_account.jiira"]
 }
 
 data "azurerm_public_ip" "main" {
