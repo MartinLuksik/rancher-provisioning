@@ -164,8 +164,6 @@ data "template_file" "rancherserver" {
     rancher_version = "${var.rancher_version}"
     admin_password = "${var.rancher_admin_password}"
   }
-
-  depends_on = ["data.azurerm_storage_account.jiira"]
 }
 
 data "azurerm_public_ip" "main" {
