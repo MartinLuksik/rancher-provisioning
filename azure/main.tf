@@ -18,6 +18,16 @@ variable "vmpassword" {
     default = "Password1234!"
 }
 
+variable "docker_version_server" {
+  default     = "18.09"
+  description = "Docker Version to run on Rancher Server"
+}
+
+variable "rancher_version" {
+  default     = "latest"
+  description = "Rancher Server Version"
+}
+
 resource "azurerm_resource_group" "main" {
   name     = "${var.prefix}"
   location = "westeurope"
