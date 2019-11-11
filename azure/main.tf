@@ -147,7 +147,13 @@ resource "azurerm_virtual_machine" "main" {
     computer_name  = "${var.ubuntuuser}"
     admin_username = "${var.vmadminuser}"
     admin_password = "${var.vmpassword}"
-    custom_data = "${file(data.template_file.rancherserver.rendered)}"
+    #custom_data = "${file(data.template_file.rancherserver.rendered)}"
+    custom_data = templatefile("rancherserver.sh", {
+    docker_version_server = "${var.docker_version_server}"
+    rancher_version = "${var.rancher_version}"
+    admin_password = "${var.rancher_admin_password}"
+    }
+  )
   }
   os_profile_linux_config {
     disable_password_authentication = false
@@ -156,14 +162,14 @@ resource "azurerm_virtual_machine" "main" {
   }
 }
 
-data "template_file" "rancherserver" {
-  template = templatefile("rancherserver.sh", {
-    docker_version_server = "${var.docker_version_server}"
-    rancher_version = "${var.rancher_version}"
-    admin_password = "${var.rancher_admin_password}"
-    }
-  )
-}
+#data "template_file" "rancherserver" {
+#  template = templatefile("rancherserver.sh", {
+#    docker_version_server = "${var.docker_version_server}"
+#    rancher_version = "${var.rancher_version}"
+#    admin_password = "${var.rancher_admin_password}"
+#    }
+#  )
+#}
 
 # vars = {
 #   docker_version_server = "${var.docker_version_server}"
