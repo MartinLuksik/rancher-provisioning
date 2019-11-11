@@ -149,8 +149,8 @@ resource "azurerm_virtual_machine" "main" {
     admin_password = "${var.vmpassword}"
     #custom_data = "${file(data.template_file.rancherserver.rendered)}"
     custom_data = templatefile("rancherserver.sh", {
-    docker_version_server = "${var.docker_version_server}"
-    rancher_version = "${var.rancher_version}"
+    docker_version_server = "${var.docker_version_server}",
+    rancher_version = "${var.rancher_version}",
     admin_password = "${var.rancher_admin_password}"
     }
   )
