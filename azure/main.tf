@@ -157,14 +157,20 @@ resource "azurerm_virtual_machine" "main" {
 }
 
 data "template_file" "rancherserver" {
-  template = "${file("rancherserver.sh")}"
-
-  vars = {
+  template = templatefile("rancherserver.sh", {
     docker_version_server = "${var.docker_version_server}"
     rancher_version = "${var.rancher_version}"
     admin_password = "${var.rancher_admin_password}"
-  }
+    }
+  )
 }
+
+# vars = {
+#   docker_version_server = "${var.docker_version_server}"
+#   rancher_version = "${var.rancher_version}"
+#   admin_password = "${var.rancher_admin_password}"
+# }
+#}
 
 data "azurerm_public_ip" "main" {
   name                = "${azurerm_public_ip.main.name}"
