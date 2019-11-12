@@ -1,5 +1,5 @@
 variable "prefix" {
-    default = ""
+    default = "unknown"
 }
 
 variable "vmsize" {
@@ -11,11 +11,11 @@ variable "ubuntuuser" {
 }
 
 variable "vmadminuser" {
-    default = ""
+    default = "unknown"
 }
 
 variable "vmpassword" {
-    default = ""
+    default = "Unknown1234!"
 }
 
 variable "docker_version_server" {
@@ -29,7 +29,7 @@ variable "rancher_version" {
 }
 
 variable "rancher_admin_password" {
-  default = ""
+  default = "unknown"
   description = "Rancher admin Password"
 }
 
