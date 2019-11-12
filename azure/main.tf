@@ -1,5 +1,5 @@
 variable "prefix" {
-    default = "nbapcgo"
+    default = ""
 }
 
 variable "vmsize" {
@@ -11,11 +11,11 @@ variable "ubuntuuser" {
 }
 
 variable "vmadminuser" {
-    default = "admin"
+    default = ""
 }
 
 variable "vmpassword" {
-    default = "Password1234!"
+    default = ""
 }
 
 variable "docker_version_server" {
@@ -29,7 +29,7 @@ variable "rancher_version" {
 }
 
 variable "rancher_admin_password" {
-  default = "notrelevant"
+  default = ""
   description = "Rancher admin Password"
 }
 
