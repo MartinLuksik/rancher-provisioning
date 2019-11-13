@@ -1,5 +1,5 @@
 variable "rancher_api_url" {
-  default     = "https://rancher.mldedicated.com/v3"
+  default     = "https://rancher.mldedicated.net/v3"
   description = "Rancher Server Version"
 }
 variable "rancher2_access_key" {
