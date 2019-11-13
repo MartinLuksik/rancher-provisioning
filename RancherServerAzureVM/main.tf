@@ -24,7 +24,7 @@ variable "docker_version_server" {
 }
 
 variable "rancher_version" {
-  default     = "latest"
+  default     = "v2.2.9"
   description = "Rancher Server Version"
 }
 
