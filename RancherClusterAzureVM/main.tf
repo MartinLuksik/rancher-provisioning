@@ -30,7 +30,7 @@ variable "resource_group" {
   default     = "ranchercluster"
   description = "Resource group of the Rancher Cluster"
 }
-number_of_worker_nodes
+
 variable "number_of_worker_nodes" {
   default     = 0
   description = "Number of default worker nodes in the worker node pool."
