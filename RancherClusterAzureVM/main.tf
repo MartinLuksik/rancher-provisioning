@@ -4,16 +4,11 @@ variable "rancher_api_url" {
 }
 variable "rancher2_access_key" {
   default     = "latest"
-  description = "Rancher Server Version"
+  description = "Rancher Server Access Key"
 }
 variable "rancher2_secret_key" {
   default     = "latest"
-  description = "Rancher Server Version"
-}
-
-variable "rancher2_secret_key" {
-  default     = "latest"
-  description = "Rancher Server Version"
+  description = "Rancher Server Secret key"
 }
 
 variable "azure_client_id" {
