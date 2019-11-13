@@ -32,7 +32,7 @@ variable "resource_group" {
 }
 
 variable "number_of_worker_nodes" {
-  default     = 0
+  default     = 1
   description = "Number of default worker nodes in the worker node pool."
 }
 
