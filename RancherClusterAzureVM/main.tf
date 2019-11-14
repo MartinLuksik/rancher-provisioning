@@ -69,7 +69,7 @@ resource "rancher2_node_template" "main" {
 
 # Create a new rancher2 RKE Cluster
 resource "rancher2_cluster" "main" {
-  name = "Cluster"
+  name = "cluster"
   description = "Custom RKE Cluster"
   rke_config {
     network {
@@ -81,7 +81,7 @@ resource "rancher2_cluster" "main" {
 # Create a new rancher2 Node Pool - Master (with a worker role)
 resource "rancher2_node_pool" "master" {
   cluster_id =  "${rancher2_cluster.main.id}"
-  name = "MLCluster"
+  name = "mlcluster-master"
   hostname_prefix =  "mlcluster"
   node_template_id = "${rancher2_node_template.main.id}"
   quantity = 1
@@ -93,7 +93,7 @@ resource "rancher2_node_pool" "master" {
 # Create a new rancher2 Node Pool - Workers
 resource "rancher2_node_pool" "worker" {
   cluster_id =  "${rancher2_cluster.main.id}"
-  name = "MLCluster"
+  name = "mlcluster-worker"
   hostname_prefix =  "mlcluster"
   node_template_id = "${rancher2_node_template.main.id}"
   quantity = "${var.number_of_worker_nodes}"
