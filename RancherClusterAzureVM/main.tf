@@ -41,6 +41,7 @@ provider "rancher2" {
   api_url    = "${var.rancher_api_url}"
   access_key = "${var.rancher2_access_key}"
   secret_key = "${var.rancher2_secret_key}"
+  insecure = true
 }
 
 # Create a new rancher2 Cloud Credential
@@ -50,7 +51,7 @@ resource "rancher2_cloud_credential" "main" {
   azure_credential_config {
     client_id = "${var.azure_client_id}"
     client_secret = "${var.azure_client_secret}"
-    subscription_id= "${var.azure_subscription_id}"
+    subscription_id= "${var.azure_subscription_id}"    
   }
 }
 
