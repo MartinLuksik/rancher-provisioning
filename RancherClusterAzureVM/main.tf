@@ -63,7 +63,18 @@ resource "rancher2_node_template" "main" {
   azure_config {
     location ="westeurope"
     resource_group="${var.resource_group}"
-    size="Standard_A2"
+    size="Standard_D2_v2"
+    availability_set="docker-machine"
+    environment="AzurePublicCloud"
+    subnet="docker-machine"
+    subnet_prefix="192.168.0.0/16"
+    vnet="docker-machine-vnet"
+    static_public_ip=false
+    image="canonical:UbuntuServer:16.04.0-LTS:latest"
+    docker_port=2376
+    open_port=["6443/tcp","2379/tcp","2380/tcp","8472/udp","4789/udp","9796/tcp","10256/tcp","10250/tcp","10251/tcp","10252/tcp"]
+    ssh_user="docker-user"
+    storage_type="Standard_LRS"
   }
 }
 
