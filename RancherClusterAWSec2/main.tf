@@ -77,7 +77,7 @@ resource "rancher2_cluster" "main" {
 resource "rancher2_node_pool" "master" {
   cluster_id =  "${rancher2_cluster.main.id}"
   name = "mlcluster-master"
-  hostname_prefix =  "mlcluster"
+  hostname_prefix =  "master"
   node_template_id = "${rancher2_node_template.main.id}"
   quantity = 1
   control_plane = true
@@ -89,7 +89,7 @@ resource "rancher2_node_pool" "master" {
 resource "rancher2_node_pool" "worker" {
   cluster_id =  "${rancher2_cluster.main.id}"
   name = "mlcluster-worker"
-  hostname_prefix =  "mlcluster"
+  hostname_prefix =  "worker"
   node_template_id = "${rancher2_node_template.main.id}"
   quantity = "${var.number_of_worker_nodes}"
   control_plane = false
