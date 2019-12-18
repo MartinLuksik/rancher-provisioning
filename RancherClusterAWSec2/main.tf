@@ -46,7 +46,7 @@ resource "rancher2_cloud_credential" "main" {
 
 # Create a new rancher2 Node Template from Rancher 2.2.x
 resource "rancher2_node_template" "main" {
-  name = "master"
+  name = "t2node"
   description = "t2node"
   cloud_credential_id = "${rancher2_cloud_credential.main.id}"
   amazonec2_config {
@@ -55,7 +55,7 @@ resource "rancher2_node_template" "main" {
     security_group = ["rancher-nodes"]
     subnet_id = "subnet-d2744c9f"
     vpc_id = "vpc-c93225a2"
-    zone = "a"
+    zone = "c"
     instance_type="t2.medium"
     ssh_user="rancher"
     iam_instance_profile="rancherpassrole"
