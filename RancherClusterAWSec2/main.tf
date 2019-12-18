@@ -21,11 +21,6 @@ variable "aws_secret_key" {
   description = "AWS Secret Key"
 }
 
-variable "resource_group" {
-  default     = "ranchercluster"
-  description = "Resource group of the Rancher Cluster"
-}
-
 variable "number_of_worker_nodes" {
   default     = 1
   description = "Number of default worker nodes in the worker node pool."
@@ -53,7 +48,7 @@ resource "rancher2_cloud_credential" "main" {
 resource "rancher2_node_template" "main" {
   name = "master"
   description = "t2node"
-  cloud_credential_id = "${rancher2_cloud_credential.main}"
+  cloud_credential_id = "${rancher2_cloud_credential.main.id}"
   amazonec2_config {
     ami =  "ami-0079d316193c1c1f2"
     region = "eu-central-1"
